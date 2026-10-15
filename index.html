@@ -139,9 +139,31 @@ html.lenis.lenis-smooth{scroll-behavior:auto!important}
   .button.light{box-shadow:0 8px 30px #ffffff10}.button:hover{box-shadow:0 8px 36px #ffffff1c}
   .group-ticket:after{background:radial-gradient(ellipse,#ffffff18,transparent 60%);animation:card-light-drift 4.6s linear infinite paused!important}.group-ticket.in-view:after{animation-play-state:running!important}
 }
-@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){.ticket-cursor{display:grid!important;backdrop-filter:none;background:#111d;width:88px;height:88px}.ticket-cursor span{font-size:9px}.ticket-cursor{translate:-50% -50%}.ticket-cursor.is-visible{opacity:1;scale:1}}
 @media(max-width:900px),(max-aspect-ratio:4/5){.hero-copy{top:var(--mobile-copy-top)}.section-navigation-transition{backdrop-filter:blur(5px) saturate(.94)!important;-webkit-backdrop-filter:blur(5px) saturate(.94)!important}}
 @media(max-width:360px){.wordmark{gap:6px}.wordmark>.brand-symbol{width:20px;height:22px}.wordmark-text,.wordmark-text span{font-size:16px}.wordmark-text{gap:5px}}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+.hero-scene-layer{position:absolute;inset:0;will-change:opacity;contain:paint}
+.hero-symbol-art{position:absolute;inset:0;display:block;width:100%;height:100%;pointer-events:none;animation:v-symbol-arrival 1.42s .18s cubic-bezier(.16,1,.3,1) backwards}
+.hero-scene{opacity:1}.hero-symbol-art .hero-symbol{opacity:1}
+.experience-cta{bottom:24px;min-height:48px;padding:13px 24px;z-index:2}
+@media(max-width:900px),(max-aspect-ratio:4/5){.hero-artboard{top:50%}.hero-art{mask-image:none}.hero-atmosphere{display:none!important}.hero-scene-layer>.hero-art,.hero-symbol-art{animation:none}.hero-scroll{height:260svh}}
+@media(max-width:760px){.experience-stage{height:430px}.experience-stage>svg{top:8px;height:330px;width:1100px}.experience-cta{bottom:24px;min-height:48px;font-size:11px;background:#090909f2;gap:22px}}
+@media(max-width:900px),(max-aspect-ratio:4/5){
+  /* Hide the old baked-in navigation cutout with a seamless black-to-photo blend. */
+  .hero-scene-layer{mask-image:linear-gradient(to bottom,transparent 0 9%,#000 23% 94%,transparent 100%);-webkit-mask-image:linear-gradient(to bottom,transparent 0 9%,#000 23% 94%,transparent 100%)}
+}
+@media(max-width:760px){.experience-stage>svg{mask-image:linear-gradient(#000 0 87%,transparent 100%);-webkit-mask-image:linear-gradient(#000 0 87%,transparent 100%)}}
+@media(prefers-reduced-motion:reduce){.hero-symbol-art{animation:none}.hero-scroll{height:100svh}}
+/* Keep the smaller live caption inside the viewport, independent of the photo crop. */
+.hero-pin>.hero-copy{left:max(32px,4.3vw);top:auto;bottom:clamp(28px,6svh,56px);transform:none;max-width:calc(100% - 64px);will-change:opacity}
+.hero-pin>.hero-copy .hero-title{font-size:36px;line-height:1.08;letter-spacing:-.8px;margin:0 0 15px}
+.hero-pin>.hero-copy .hero-title span{display:block}
+.hero-pin>.hero-copy .hero-cta{width:180px;height:48px;font-size:16px}
+@media(max-width:900px),(max-aspect-ratio:4/5){
+  .hero-pin>.hero-copy{left:24px;bottom:max(24px,env(safe-area-inset-bottom));max-width:calc(100% - 48px)}
+  .hero-pin>.hero-copy .hero-title{font-size:clamp(24px,6.7vw,29px);line-height:1.08;letter-spacing:-.6px;margin-bottom:12px}
+  .hero-pin>.hero-copy .hero-cta{width:162px;height:44px;font-size:15px}
+}
 
 </style>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2215%22%20fill%3D%22%23080808%22%2F%3E%3Cpath%20d%3D%22M12%2014h10l17%2037H28zm29%200h12l-10%2020H32z%22%20fill%3D%22%23fff%22%2F%3E%3C%2Fsvg%3E">
@@ -178,6 +200,7 @@ html.lenis.lenis-smooth{scroll-behavior:auto!important}
 </nav>
 </header>
 <div class="hero-artboard" id="hero-artboard">
+<div class="hero-scene-layer" id="hero-scene-layer">
 <svg class="hero-art" viewBox="0 0 1672 941" aria-hidden="true" focusable="false">
 <defs>
 
@@ -192,6 +215,9 @@ html.lenis.lenis-smooth{scroll-behavior:auto!important}
 <g class="hero-scene" id="hero-scene" clip-path="url(#scene-clip)">
 <use href="#reference-art"/>
 </g>
+</svg>
+</div>
+<svg class="hero-symbol-art" viewBox="0 0 1672 941" aria-hidden="true" focusable="false">
 <g class="hero-symbol" id="hero-symbol" clip-path="url(#symbol-clip)">
 <use href="#reference-art"/>
 </g>
@@ -199,16 +225,10 @@ html.lenis.lenis-smooth{scroll-behavior:auto!important}
 <div class=hero-atmosphere aria-hidden=true>
 </div>
 
-<div class="hero-copy" id="hero-copy">
-<h1 class="hero-title" id="hero-title">
-<span>Os melhores shows.</span>
-<span>Em Maceió.</span>
-</h1>
-<a class="hero-cta" href="#eventos">Ver shows <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true">
-<path d="M6 18 18 6M7 6h11v11"/>
-</svg>
-</a>
 </div>
+<div class="hero-copy" id="hero-copy">
+<h1 class="hero-title" id="hero-title"><span>Os melhores shows.</span><span>Em Maceió.</span></h1>
+<a class="hero-cta" href="#eventos">Ver shows <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M7 6h11v11"/></svg></a>
 </div>
 </div>
 </section>
@@ -457,7 +477,7 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 (() => {
   'use strict';
   const $ = id => document.getElementById(id);
-  const pin=$('hero-pin'),story=$('inicio'),board=$('hero-artboard'),nav=$('vyza-nav'),copy=$('hero-copy');
+  const pin=$('hero-pin'),story=$('inicio'),board=$('hero-artboard'),nav=$('vyza-nav'),sceneLayer=$('hero-scene-layer'),copy=$('hero-copy'),atmosphere=document.querySelector('.hero-atmosphere');
   const menu=$('mobile-menu'),toggle=$('mobile-toggle'),contentNav=$('content-nav'),contentMenu=$('content-menu'),contentToggle=$('content-toggle');
   const reduced=matchMedia('(prefers-reduced-motion: reduce)');
   const clamp=n=>Math.max(0,Math.min(1,n));
@@ -471,6 +491,7 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
   document.querySelectorAll('.benefit').forEach((el,i)=>el.style.setProperty('--benefit-index',i));
   let frame=0,revealObservers=[],ambientObserver=null,navigationAnimation=null,geometryDirty=true,lastHeroProgress=-1;
   let geometry={h:innerHeight,start:0,distance:1};const wordOpacities=[];
+  let visualProgress=null,previousTime=0;
   const experienceStage=document.querySelector('.experience-stage');
   const finePointer=matchMedia('(hover: hover) and (pointer: fine)');
   let smoothScroll=null,scrollFrame=0;
@@ -483,17 +504,16 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
     smoothScroll.on('virtual-scroll',wakeScroll);
   }
   let pointerFrame=0,pointerUpdate=null;
-  const ticketCursor=document.createElement('div');ticketCursor.className='ticket-cursor';ticketCursor.setAttribute('aria-hidden','true');ticketCursor.innerHTML='<span>ENTRAR ↗</span>';document.body.append(ticketCursor);
   function schedulePointer(update){pointerUpdate=update;if(!pointerFrame)pointerFrame=requestAnimationFrame(()=>{pointerFrame=0;const run=pointerUpdate;pointerUpdate=null;run?.()})}
   document.querySelectorAll('.group-ticket,.button').forEach(el=>{
     let bounds=null;
-    el.addEventListener('pointerenter',event=>{if(finePointer.matches&&!reduced.matches){bounds=el.getBoundingClientRect();if(el.matches('.group-ticket')){ticketCursor.style.transform=`translate(${event.clientX}px,${event.clientY}px)`;ticketCursor.classList.add('is-visible')}}},{passive:true});
+    el.addEventListener('pointerenter',()=>{if(finePointer.matches&&!reduced.matches)bounds=el.getBoundingClientRect()},{passive:true});
     el.addEventListener('pointermove',event=>{
       if(!bounds||!finePointer.matches||reduced.matches)return;
       const x=clamp((event.clientX-bounds.left)/bounds.width)-.5,y=clamp((event.clientY-bounds.top)/bounds.height)-.5;
-      schedulePointer(()=>{if(el.matches('.group-ticket')){el.style.setProperty('--tilt-x',(-7+x*11)+'deg');el.style.setProperty('--tilt-y',(3-y*9)+'deg');ticketCursor.style.transform=`translate(${event.clientX}px,${event.clientY}px)`}else{el.style.setProperty('--magnet-x',x*12+'px');el.style.setProperty('--magnet-y',y*9+'px')}});
+      schedulePointer(()=>{if(el.matches('.group-ticket')){el.style.setProperty('--tilt-x',(-7+x*11)+'deg');el.style.setProperty('--tilt-y',(3-y*9)+'deg')}else{el.style.setProperty('--magnet-x',x*12+'px');el.style.setProperty('--magnet-y',y*9+'px')}});
     },{passive:true});
-    el.addEventListener('pointerleave',()=>{bounds=null;ticketCursor.classList.remove('is-visible');cancelAnimationFrame(pointerFrame);pointerFrame=0;pointerUpdate=null;for(const prop of ['--tilt-x','--tilt-y','--magnet-x','--magnet-y'])el.style.removeProperty(prop)},{passive:true});
+    el.addEventListener('pointerleave',()=>{bounds=null;cancelAnimationFrame(pointerFrame);pointerFrame=0;pointerUpdate=null;for(const prop of ['--tilt-x','--tilt-y','--magnet-x','--magnet-y'])el.style.removeProperty(prop)},{passive:true});
   });
   const menuStates=new WeakMap();
   function setMenu(panel,button,open){
@@ -533,18 +553,24 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
   }));
   function measureLayout(){
     geometryDirty=false;lastHeroProgress=-1;
-    const w=pin.clientWidth||innerWidth,h=pin.clientHeight||innerHeight,mobile=w<=900||w/h<=.8,scale=mobile?Math.max(w/1672,Math.min(h*.62/941,w/1100)):Math.max(w/1672,h/941),left=(w-1672*scale)/2,top=h*(mobile?.44:.5)-941*scale/2;
+    const w=pin.clientWidth||innerWidth,h=pin.clientHeight||innerHeight,mobile=w<=900||w/h<=.8,scale=Math.max(w/1672,h/941),left=(w-1672*scale)/2,top=h*.5-941*scale/2;
     const props={'--art-scale':scale,'--inverse-scale':1/scale,'--desktop-nav-left':Math.max(63,(32-left)/scale)+'px','--desktop-nav-right':Math.max(64,(32-left)/scale)+'px','--desktop-copy-left':Math.max(72,(32-left)/scale)+'px','--desktop-copy-top':Math.min(708,(h-74-top)/scale-166)+'px','--mobile-left':(16-left)/scale+'px','--mobile-top':(18-top)/scale+'px','--mobile-width':Math.max(288,w-32)+'px','--mobile-copy-left':(24-left)/scale+'px','--mobile-copy-top':(h-225-top)/scale+'px'};
     for(const [key,value]of Object.entries(props))board.style.setProperty(key,value);
-    geometry={h,start:story.offsetTop,distance:Math.max(1,story.offsetHeight-h),storyHeight:story.offsetHeight};
+    geometry={w,h,mobile,start:story.offsetTop,distance:Math.max(1,story.offsetHeight-h),storyHeight:story.offsetHeight};
   }
-  function render(){
-    frame=0;if(geometryDirty)measureLayout();const {h,start,distance,storyHeight}=geometry;
-    const p=reduced.matches?0:clamp((scrollY-start)/distance);
-    if(p!==lastHeroProgress){lastHeroProgress=p;const scene=1-smooth(.025,.72,p),navAlpha=1-smooth(0,.30,p),copyAlpha=1-smooth(.03,.36,p);
-      board.style.setProperty('--scene-opacity',scene.toFixed(3));board.style.setProperty('--nav-opacity',navAlpha.toFixed(3));board.style.setProperty('--copy-opacity',copyAlpha.toFixed(3));pin.style.setProperty('--hero-nav-opacity',navAlpha.toFixed(3));
-      nav.inert=navAlpha<.08;copy.inert=copyAlpha<.08;if(nav.inert)closeMenu();nav.style.pointerEvents=nav.inert?'none':'';copy.style.pointerEvents=copy.inert?'none':'';
+  function render(time){
+    frame=0;if(geometryDirty)measureLayout();const {h,start,distance,storyHeight,mobile}=geometry;
+    const target=reduced.matches?0:clamp((scrollY-start)/distance),immediate=typeof time!=='number';
+    const dt=previousTime?Math.min(48,Math.max(1,(time||0)-previousTime)):16.67;previousTime=time||0;
+    if(visualProgress===null||immediate||reduced.matches||!mobile||scrollY<start||scrollY>start+storyHeight)visualProgress=target;
+    else{visualProgress+=(target-visualProgress)*(1-Math.exp(-dt/55));if(Math.abs(target-visualProgress)<.0002)visualProgress=target}
+    const p=visualProgress;
+    if(p!==lastHeroProgress){lastHeroProgress=p;const scene=1-smooth(mobile?.02:.025,mobile?.78:.72,p),navAlpha=1-smooth(0,.30,p);
+      sceneLayer.style.opacity=scene.toFixed(4);nav.style.opacity=navAlpha.toFixed(4);if(atmosphere)atmosphere.style.opacity=(scene*.14).toFixed(4);
+      const copyAlpha=1-smooth(0,.4,p);copy.style.opacity=copyAlpha.toFixed(4);copy.inert=copyAlpha<.08;copy.style.pointerEvents=copy.inert?'none':'';
+      nav.inert=navAlpha<.08;if(nav.inert)closeMenu();nav.style.pointerEvents=nav.inert?'none':'';
     }
+    if(p!==target)schedule();
     const dockVisible=scrollY>storyHeight-h*.1;contentNav.classList.toggle('is-visible',dockVisible);contentNav.inert=!dockVisible;if(!dockVisible)closeContentMenu();
     document.documentElement.style.setProperty('--page-progress',clamp(scrollY/Math.max(1,document.documentElement.scrollHeight-h)));
     const bounds=phrase.getBoundingClientRect(),phraseStart=Math.max(0,scrollY+bounds.top-h*.96),end=Math.max(phraseStart+1,scrollY+bounds.bottom-h*.5),wordTarget=clamp(clamp((scrollY-phraseStart)/(end-phraseStart))+.12);
@@ -565,7 +591,7 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
     document.querySelectorAll('.hero-pin,.group-ticket,.button').forEach(el=>ambientObserver.observe(el));
     document.documentElement.classList.add('js-motion');
   }
-  addEventListener('scroll',schedule,{passive:true});addEventListener('resize',()=>{geometryDirty=true;const wantsSmooth=!reduced.matches&&finePointer.matches&&innerWidth>900;if(wantsSmooth!==Boolean(smoothScroll))setupScroll();schedule()},{passive:true});addEventListener('pageshow',()=>{geometryDirty=true;schedule()});
+  addEventListener('scroll',schedule,{passive:true});addEventListener('resize',()=>{if(pin.clientWidth===geometry.w&&pin.clientHeight===geometry.h)return;geometryDirty=true;const wantsSmooth=!reduced.matches&&finePointer.matches&&innerWidth>900;if(wantsSmooth!==Boolean(smoothScroll))setupScroll();schedule()},{passive:true});addEventListener('pageshow',()=>{geometryDirty=true;visualProgress=null;schedule()});
   addEventListener('pagehide',()=>{cancelAnimationFrame(frame);cancelAnimationFrame(pointerFrame);cancelAnimationFrame(scrollFrame);frame=0;pointerFrame=0;scrollFrame=0;pointerUpdate=null});
   document.addEventListener('visibilitychange',()=>{document.documentElement.classList.toggle('page-hidden',document.hidden);if(!document.hidden)schedule()});
   reduced.addEventListener('change',()=>{geometryDirty=true;setupObservers();setupScroll();schedule()});
