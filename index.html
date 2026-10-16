@@ -195,6 +195,27 @@ html.lenis.lenis-smooth{scroll-behavior:auto!important}
 .creator-partnership{display:inline-block;font-size:16px;font-weight:500;line-height:1.5;letter-spacing:-.2px;color:inherit;white-space:nowrap}
 .creator-partnership:hover{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px}
 @media(max-width:760px){.creator-credit{gap:10px;padding:19px 0}.creator-credit .creator-name,.creator-partnership{font-size:14px}}
+/* CodeMakers' two drifting shadow/light fields, adapted to VYZA's monochrome palette. */
+.contact{isolation:isolate;background:#1b1b1b}
+.final-scene{background:transparent}
+.final-backdrop{position:absolute;inset:0;z-index:0;overflow:hidden;contain:paint;pointer-events:none;background:radial-gradient(ellipse at 50% 36%,#747474ad,transparent 58%),linear-gradient(128deg,#0a0a0a 0%,#3e3e3e 38%,#282828 67%,#080808 100%)}
+.final-backdrop:before,.final-backdrop:after{content:'';position:absolute;pointer-events:none;transform-origin:50% 50%;background-repeat:no-repeat}
+.final-backdrop:before{inset:-28%;z-index:1;filter:blur(24px);mix-blend-mode:multiply;background:radial-gradient(ellipse at 5% 22%,#000 0%,#000000f0 12%,transparent 30%),radial-gradient(ellipse at 94% 18%,#000 0%,#000000eb 13%,transparent 31%),radial-gradient(ellipse at 91% 91%,#000 0%,#000000e6 12%,transparent 30%),radial-gradient(ellipse at 18% 86%,#000 0%,#000000e0 11%,transparent 28%);animation:vyza-shadow-drift 4.8s cubic-bezier(.45,0,.55,1) infinite alternate paused}
+.final-backdrop:after{inset:-42%;z-index:0;filter:blur(32px);mix-blend-mode:screen;background:radial-gradient(ellipse at 18% 18%,#e8e8e8a6 0%,#a6a6a673 14%,transparent 38%),radial-gradient(ellipse at 82% 72%,#d0d0d099 0%,#72727270 16%,transparent 40%),radial-gradient(ellipse at 47% 94%,#b5b5b58f 0%,#68686866 15%,transparent 36%);animation:vyza-silver-drift 6.4s cubic-bezier(.45,0,.55,1) infinite alternate paused}
+.final-contrast{position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse at 50% 35%,#080808b0 0%,#08080859 36%,transparent 75%),linear-gradient(transparent 60%,#08080899)}
+.contact.in-view .final-backdrop:before,.contact.in-view .final-backdrop:after{animation-play-state:running;will-change:transform,opacity}
+.contact .creator-credit .creator-label,.contact .creator-join,.contact .footer-rule{color:#c2c2c2}
+.final-scene .final-center{z-index:1}
+.final-actions .button:not(.light){background:#0b0b0b99}
+@keyframes vyza-shadow-drift{0%{opacity:.88;transform:translate(-14%,-9%) scale(.92) rotate(-9deg)}50%{opacity:1;transform:translate(14%,13%) scale(1.1) rotate(7deg)}100%{opacity:.94;transform:translate(28%,-11%) scale(.98) rotate(15deg)}}
+@keyframes vyza-silver-drift{0%{opacity:.76;transform:translate(11%,8%) scale(1.04) rotate(6deg)}50%{opacity:1;transform:translate(-10%,-12%) scale(1.14) rotate(-8deg)}100%{opacity:.84;transform:translate(-22%,6%) scale(.98) rotate(-14deg)}}
+@media(max-width:760px){.final-backdrop:before{filter:blur(12px)}.final-backdrop:after{filter:blur(20px)}}
+@media(prefers-reduced-motion:reduce){.final-backdrop:before,.final-backdrop:after{animation:none!important;transform:none;will-change:auto!important}}
+.final-section-transition{position:absolute;top:-1px;left:0;width:100%;height:clamp(44px,6.25vw,100px);display:block;z-index:2;fill:#080808;pointer-events:none}
+.contact{--contact-headroom:clamp(24px,4vw,56px);margin-top:calc(-1 * var(--contact-headroom))}
+.contact .final-scene{height:calc(520px + var(--contact-headroom))}
+.contact .final-center{top:calc(50% + var(--contact-headroom) / 2)}
+@media(max-width:760px){.contact .final-scene{height:calc(440px + var(--contact-headroom))}}
 
 </style>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2215%22%20fill%3D%22%23080808%22%2F%3E%3Cpath%20d%3D%22M12%2014h10l17%2037H28zm29%200h12l-10%2020H32z%22%20fill%3D%22%23fff%22%2F%3E%3C%2Fsvg%3E">
@@ -444,6 +465,9 @@ html.lenis.lenis-smooth{scroll-behavior:auto!important}
 </div>
 </section>
 <section class="contact" id="contato" aria-labelledby="contact-title">
+  <svg class="final-section-transition" viewBox="0 0 1600 100" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 0H1600V45H1062C1010 45 996 57 975 76C954 95 932 100 880 100H720C668 100 646 95 625 76C604 57 590 45 538 45H0Z"/></svg>
+  <div class="final-backdrop" aria-hidden="true"></div>
+  <div class="final-contrast" aria-hidden="true"></div>
 <div class="final-scene">
   <div class="final-center">
     <svg class="final-v" viewBox="0 0 416 386" aria-hidden="true"><path d="M0 1H107L258 386H157Z M309 0H416L326 200H219Z"/></svg>
@@ -456,7 +480,7 @@ html.lenis.lenis-smooth{scroll-behavior:auto!important}
   </div>
 </div>
 
-<div class="shell"><p class="contact-note">Atendimento: +55 82 8880-0875 · Maceió, Alagoas<br>Consulte os shows, os valores e os setores disponíveis antes de comprar.</p>
+<div class="shell">
 <footer>
 <div class="creator-credit">
 <div class="creator-identity">
@@ -638,7 +662,7 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
     }
     document.querySelectorAll('[data-reveal],.final-center').forEach(el=>{const index=el.matches('.experience-stage,.reveal-delay')?2:el.matches('.display,.contact h2')?1:0;revealObservers[index].observe(el)});
     ambientObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{entry.target.classList.toggle('in-view',entry.isIntersecting)}),{threshold:0});
-    document.querySelectorAll('.hero-pin,.group-ticket,.button').forEach(el=>ambientObserver.observe(el));
+    document.querySelectorAll('.hero-pin,.group-ticket,.button,.contact').forEach(el=>ambientObserver.observe(el));
     document.documentElement.classList.add('js-motion');
   }
   addEventListener('scroll',schedule,{passive:true});addEventListener('resize',()=>{if(pin.clientWidth===geometry.w&&pin.clientHeight===geometry.h)return;geometryDirty=true;const wantsSmooth=!reduced.matches&&finePointer.matches&&innerWidth>900;if(wantsSmooth!==Boolean(smoothScroll))setupScroll();schedule()},{passive:true});addEventListener('pageshow',()=>{geometryDirty=true;visualProgress=null;schedule()});
